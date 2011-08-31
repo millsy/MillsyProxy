@@ -1,0 +1,290 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		83F804AE140E5D280056A15A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83F804AD140E5D280056A15A /* Cocoa.framework */; };
+		83F804B8140E5D280056A15A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 83F804B6140E5D280056A15A /* InfoPlist.strings */; };
+		83F804BA140E5D280056A15A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F804B9140E5D280056A15A /* main.m */; };
+		83F804BE140E5D280056A15A /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 83F804BC140E5D280056A15A /* Credits.rtf */; };
+		83F804C1140E5D280056A15A /* MillsyProxyAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F804C0140E5D280056A15A /* MillsyProxyAppDelegate.m */; };
+		83F804C4140E5D280056A15A /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83F804C2140E5D280056A15A /* MainMenu.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		83F804A9140E5D280056A15A /* MillsyProxy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MillsyProxy.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		83F804AD140E5D280056A15A /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		83F804B0140E5D280056A15A /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		83F804B1140E5D280056A15A /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		83F804B2140E5D280056A15A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		83F804B5140E5D280056A15A /* MillsyProxy-Info.plist */ = {isa = PBXFileReference; path = "MillsyProxy-Info.plist"; sourceTree = "<group>"; };
+		83F804B7140E5D280056A15A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		83F804B9140E5D280056A15A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		83F804BB140E5D280056A15A /* MillsyProxy-Prefix.pch */ = {isa = PBXFileReference; path = "MillsyProxy-Prefix.pch"; sourceTree = "<group>"; };
+		83F804BD140E5D280056A15A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		83F804BF140E5D280056A15A /* MillsyProxyAppDelegate.h */ = {isa = PBXFileReference; path = MillsyProxyAppDelegate.h; sourceTree = "<group>"; };
+		83F804C0140E5D280056A15A /* MillsyProxyAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MillsyProxyAppDelegate.m; sourceTree = "<group>"; };
+		83F804C3140E5D280056A15A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		83F804A6140E5D280056A15A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				83F804AE140E5D280056A15A /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		83F8049E140E5D280056A15A = {
+			isa = PBXGroup;
+			children = (
+				83F804B3140E5D280056A15A /* MillsyProxy */,
+				83F804AC140E5D280056A15A /* Frameworks */,
+				83F804AA140E5D280056A15A /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		83F804AA140E5D280056A15A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				83F804A9140E5D280056A15A /* MillsyProxy.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		83F804AC140E5D280056A15A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				83F804AD140E5D280056A15A /* Cocoa.framework */,
+				83F804AF140E5D280056A15A /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		83F804AF140E5D280056A15A /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				83F804B0140E5D280056A15A /* AppKit.framework */,
+				83F804B1140E5D280056A15A /* CoreData.framework */,
+				83F804B2140E5D280056A15A /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		83F804B3140E5D280056A15A /* MillsyProxy */ = {
+			isa = PBXGroup;
+			children = (
+				83F804BF140E5D280056A15A /* MillsyProxyAppDelegate.h */,
+				83F804C0140E5D280056A15A /* MillsyProxyAppDelegate.m */,
+				83F804C2140E5D280056A15A /* MainMenu.xib */,
+				83F804B4140E5D280056A15A /* Supporting Files */,
+			);
+			path = MillsyProxy;
+			sourceTree = "<group>";
+		};
+		83F804B4140E5D280056A15A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				83F804B5140E5D280056A15A /* MillsyProxy-Info.plist */,
+				83F804B6140E5D280056A15A /* InfoPlist.strings */,
+				83F804B9140E5D280056A15A /* main.m */,
+				83F804BB140E5D280056A15A /* MillsyProxy-Prefix.pch */,
+				83F804BC140E5D280056A15A /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		83F804A8140E5D280056A15A /* MillsyProxy */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 83F804C7140E5D280056A15A /* Build configuration list for PBXNativeTarget "MillsyProxy" */;
+			buildPhases = (
+				83F804A5140E5D280056A15A /* Sources */,
+				83F804A6140E5D280056A15A /* Frameworks */,
+				83F804A7140E5D280056A15A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MillsyProxy;
+			productName = MillsyProxy;
+			productReference = 83F804A9140E5D280056A15A /* MillsyProxy.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		83F804A0140E5D280056A15A /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 83F804A3140E5D280056A15A /* Build configuration list for PBXProject "MillsyProxy" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 83F8049E140E5D280056A15A;
+			productRefGroup = 83F804AA140E5D280056A15A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				83F804A8140E5D280056A15A /* MillsyProxy */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		83F804A7140E5D280056A15A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				83F804B8140E5D280056A15A /* InfoPlist.strings in Resources */,
+				83F804BE140E5D280056A15A /* Credits.rtf in Resources */,
+				83F804C4140E5D280056A15A /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		83F804A5140E5D280056A15A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				83F804BA140E5D280056A15A /* main.m in Sources */,
+				83F804C1140E5D280056A15A /* MillsyProxyAppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		83F804B6140E5D280056A15A /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				83F804B7140E5D280056A15A /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		83F804BC140E5D280056A15A /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				83F804BD140E5D280056A15A /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		83F804C2140E5D280056A15A /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				83F804C3140E5D280056A15A /* en */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		83F804C5140E5D280056A15A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		83F804C6140E5D280056A15A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		83F804C8140E5D280056A15A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MillsyProxy/MillsyProxy-Prefix.pch";
+				INFOPLIST_FILE = "MillsyProxy/MillsyProxy-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		83F804C9140E5D280056A15A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MillsyProxy/MillsyProxy-Prefix.pch";
+				INFOPLIST_FILE = "MillsyProxy/MillsyProxy-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		83F804A3140E5D280056A15A /* Build configuration list for PBXProject "MillsyProxy" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				83F804C5140E5D280056A15A /* Debug */,
+				83F804C6140E5D280056A15A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		83F804C7140E5D280056A15A /* Build configuration list for PBXNativeTarget "MillsyProxy" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				83F804C8140E5D280056A15A /* Debug */,
+				83F804C9140E5D280056A15A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 83F804A0140E5D280056A15A /* Project object */;
+}
