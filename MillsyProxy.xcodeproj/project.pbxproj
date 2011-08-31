@@ -13,6 +13,8 @@
 		83F804BE140E5D280056A15A /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 83F804BC140E5D280056A15A /* Credits.rtf */; };
 		83F804C1140E5D280056A15A /* MillsyProxyAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F804C0140E5D280056A15A /* MillsyProxyAppDelegate.m */; };
 		83F804C4140E5D280056A15A /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83F804C2140E5D280056A15A /* MainMenu.xib */; };
+		83F804CC140E5D850056A15A /* AppController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F804CB140E5D850056A15A /* AppController.m */; };
+		83F804CE140E5ECB0056A15A /* proxy.png in Resources */ = {isa = PBXBuildFile; fileRef = 83F804CD140E5ECB0056A15A /* proxy.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,14 +23,17 @@
 		83F804B0140E5D280056A15A /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		83F804B1140E5D280056A15A /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		83F804B2140E5D280056A15A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		83F804B5140E5D280056A15A /* MillsyProxy-Info.plist */ = {isa = PBXFileReference; path = "MillsyProxy-Info.plist"; sourceTree = "<group>"; };
+		83F804B5140E5D280056A15A /* MillsyProxy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MillsyProxy-Info.plist"; sourceTree = "<group>"; };
 		83F804B7140E5D280056A15A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		83F804B9140E5D280056A15A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		83F804BB140E5D280056A15A /* MillsyProxy-Prefix.pch */ = {isa = PBXFileReference; path = "MillsyProxy-Prefix.pch"; sourceTree = "<group>"; };
+		83F804BB140E5D280056A15A /* MillsyProxy-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MillsyProxy-Prefix.pch"; sourceTree = "<group>"; };
 		83F804BD140E5D280056A15A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
-		83F804BF140E5D280056A15A /* MillsyProxyAppDelegate.h */ = {isa = PBXFileReference; path = MillsyProxyAppDelegate.h; sourceTree = "<group>"; };
+		83F804BF140E5D280056A15A /* MillsyProxyAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MillsyProxyAppDelegate.h; sourceTree = "<group>"; };
 		83F804C0140E5D280056A15A /* MillsyProxyAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MillsyProxyAppDelegate.m; sourceTree = "<group>"; };
 		83F804C3140E5D280056A15A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		83F804CA140E5D850056A15A /* AppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppController.h; sourceTree = "<group>"; };
+		83F804CB140E5D850056A15A /* AppController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppController.m; sourceTree = "<group>"; };
+		83F804CD140E5ECB0056A15A /* proxy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = proxy.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,6 +51,9 @@
 		83F8049E140E5D280056A15A = {
 			isa = PBXGroup;
 			children = (
+				83F804CD140E5ECB0056A15A /* proxy.png */,
+				83F804CA140E5D850056A15A /* AppController.h */,
+				83F804CB140E5D850056A15A /* AppController.m */,
 				83F804B3140E5D280056A15A /* MillsyProxy */,
 				83F804AC140E5D280056A15A /* Frameworks */,
 				83F804AA140E5D280056A15A /* Products */,
@@ -152,6 +160,7 @@
 				83F804B8140E5D280056A15A /* InfoPlist.strings in Resources */,
 				83F804BE140E5D280056A15A /* Credits.rtf in Resources */,
 				83F804C4140E5D280056A15A /* MainMenu.xib in Resources */,
+				83F804CE140E5ECB0056A15A /* proxy.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -164,6 +173,7 @@
 			files = (
 				83F804BA140E5D280056A15A /* main.m in Sources */,
 				83F804C1140E5D280056A15A /* MillsyProxyAppDelegate.m in Sources */,
+				83F804CC140E5D850056A15A /* AppController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
