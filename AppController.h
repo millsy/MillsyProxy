@@ -13,9 +13,21 @@
     IBOutlet NSMenu *statusMenu;
     NSStatusItem *statusItem;
     NSImage *statusImage;
+    IBOutlet NSMenu *interfacesMenu;
+    IBOutlet NSMenuItem *clearProxy;
+    IBOutlet NSMenuItem *setProxy;
+    IBOutlet NSWindow *setProxyWindow;
+    
+    NSMutableArray* interfaces;
 }
 
 
 -(IBAction)helloWorld:(id)sender;
+
+-(IBAction)EnableDisable:(id)sender;
+-(IBAction)ClearProxy:(id)sender;
+-(IBAction)SetProxy:(id)sender;
+
+- (NSMutableArray*) GetInterfacesForMenu;
 
 @end

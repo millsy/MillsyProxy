@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8324A991140E9D42006C663C /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8324A990140E9D42006C663C /* SystemConfiguration.framework */; };
+		8324A994140E9D56006C663C /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8324A993140E9D56006C663C /* CoreServices.framework */; };
+		8324A997140F47B3006C663C /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8324A996140F47B3006C663C /* Security.framework */; };
+		8336A5C614177BB00041A796 /* MInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 8336A5C514177BB00041A796 /* MInterface.m */; };
 		83F804AE140E5D280056A15A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83F804AD140E5D280056A15A /* Cocoa.framework */; };
 		83F804B8140E5D280056A15A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 83F804B6140E5D280056A15A /* InfoPlist.strings */; };
 		83F804BA140E5D280056A15A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F804B9140E5D280056A15A /* main.m */; };
@@ -18,6 +22,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8324A990140E9D42006C663C /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		8324A993140E9D56006C663C /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
+		8324A996140F47B3006C663C /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		8336A5C414177BB00041A796 /* MInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MInterface.h; sourceTree = "<group>"; };
+		8336A5C514177BB00041A796 /* MInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MInterface.m; sourceTree = "<group>"; };
 		83F804A9140E5D280056A15A /* MillsyProxy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MillsyProxy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		83F804AD140E5D280056A15A /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		83F804B0140E5D280056A15A /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -41,6 +50,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8324A997140F47B3006C663C /* Security.framework in Frameworks */,
+				8324A994140E9D56006C663C /* CoreServices.framework in Frameworks */,
+				8324A991140E9D42006C663C /* SystemConfiguration.framework in Frameworks */,
 				83F804AE140E5D280056A15A /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -51,6 +63,11 @@
 		83F8049E140E5D280056A15A = {
 			isa = PBXGroup;
 			children = (
+				8336A5C414177BB00041A796 /* MInterface.h */,
+				8336A5C514177BB00041A796 /* MInterface.m */,
+				8324A996140F47B3006C663C /* Security.framework */,
+				8324A993140E9D56006C663C /* CoreServices.framework */,
+				8324A990140E9D42006C663C /* SystemConfiguration.framework */,
 				83F804CD140E5ECB0056A15A /* proxy.png */,
 				83F804CA140E5D850056A15A /* AppController.h */,
 				83F804CB140E5D850056A15A /* AppController.m */,
@@ -174,6 +191,7 @@
 				83F804BA140E5D280056A15A /* main.m in Sources */,
 				83F804C1140E5D280056A15A /* MillsyProxyAppDelegate.m in Sources */,
 				83F804CC140E5D850056A15A /* AppController.m in Sources */,
+				8336A5C614177BB00041A796 /* MInterface.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -255,6 +273,7 @@
 		83F804C8140E5D280056A15A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MillsyProxy/MillsyProxy-Prefix.pch";
 				INFOPLIST_FILE = "MillsyProxy/MillsyProxy-Info.plist";
@@ -266,6 +285,7 @@
 		83F804C9140E5D280056A15A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MillsyProxy/MillsyProxy-Prefix.pch";
 				INFOPLIST_FILE = "MillsyProxy/MillsyProxy-Info.plist";
@@ -293,6 +313,7 @@
 				83F804C9140E5D280056A15A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
