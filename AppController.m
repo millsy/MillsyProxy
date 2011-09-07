@@ -40,8 +40,9 @@
     //Enables highlighting
     [statusItem setHighlightMode:NO];
     
+    [setProxyWindow makeFirstResponder:urlField];
    
-    interfaces = [self GetInterfacesForMenu];
+    interfaces = [[self GetInterfacesForMenu]retain];
     NSEnumerator * enumerator = [interfaces objectEnumerator];
     id element;
     
@@ -52,20 +53,39 @@
         NSMenuItem *testItem = [[[NSMenuItem alloc] initWithTitle:[thisInterface Name] action:@selector(EnableDisable:) keyEquivalent:@""] autorelease];
         [testItem setTarget:self];
         [testItem setEnabled:TRUE];
-        [testItem setState:NSOffState];
-        
+        if([thisInterface IsChecked])
+        {
+            [testItem setState:NSOnState];
+        }else{
+            [testItem setState:NSOffState];
+        }
         [interfacesMenu addItem:testItem];
     }
 }
 
 -(IBAction)EnableDisable:(id)sender
 {
-    NSMenuItem *menuItem = sender;
-    if([menuItem state] == NSOnState)
+    NSMenuItem* mi = sender;
+    NSEnumerator * enumerator = [interfaces objectEnumerator];
+    id element;    
+    while(element = [enumerator nextObject])
     {
-        [menuItem setState:NSOffState]; 
-    }else{
-        [menuItem setState:NSOnState];
+        MInterface* thisInterface = element;
+        
+        if([thisInterface Name] == [mi title])
+        {
+            NSMenuItem *menuItem = sender;
+            if([menuItem state] == NSOnState)
+            {
+                [thisInterface Checked:false];
+                [menuItem setState:NSOffState]; 
+            }else{
+                [thisInterface Checked:true];
+                [menuItem setState:NSOnState];
+            }
+            
+            break;
+        }
     }
 }
 
@@ -95,9 +115,9 @@
             CFRelease(name);
             CFRelease(props);
         }
+        CFRelease(services);
+        CFRelease(store);
     }
-    CFRelease(store);
-    
     return names;
 }
 
@@ -110,16 +130,47 @@
 
 -(IBAction)ClearProxy:(id)sender
 {
-    
+    [self SetProxiesForInterfaces:nil];
 }
 
--(IBAction)SetProxy:(id)sender
+-(IBAction)ShowProxyWindow:(id)sender
 {
-    [setProxyWindow makeKeyAndOrderFront:self];
+    [setProxyWindow setLevel:NSPopUpMenuWindowLevel];
+    [setProxyWindow makeKeyAndOrderFront:nil]; 
+    //[setProxyWindow makeKeyWindow];
+}
+
+-(IBAction)SaveNewProxy:(id)sender
+{
+    [setProxyWindow orderOut:self];
+    NSString* url = [[urlField stringValue] retain];
+    [self SetProxiesForInterfaces:url];
+    [url release];
+}
+
+-(IBAction)Close:(id)sender
+{
+    [setProxyWindow orderOut:self];
 }
 
 - (void) SetProxiesForInterfaces: (NSString*) url
 {
+    AuthorizationRef myAuthorizationRef;
+    
+    // Get the authorization
+    OSStatus err = AuthorizationCreate(NULL, kAuthorizationEmptyEnvironment, kAuthorizationFlagDefaults, &myAuthorizationRef);
+    if (err != errAuthorizationSuccess) NSLog(@"Auth failed");
+    
+    AuthorizationItem myItems = {kAuthorizationRightExecute, 0, NULL, 0};
+    AuthorizationRights myRights = {1, &myItems};
+    AuthorizationFlags myFlags = kAuthorizationFlagInteractionAllowed | kAuthorizationFlagPreAuthorize | kAuthorizationFlagExtendRights;
+    
+    err = AuthorizationCopyRights(myAuthorizationRef, &myRights, NULL, myFlags, NULL);
+    if (err != errAuthorizationSuccess) {
+        NSLog(@"Failed auth");
+        return;
+    }
+    
     NSEnumerator * enumerator = [interfaces objectEnumerator];
     id element;
     
@@ -128,120 +179,88 @@
         MInterface* thisInterface = element;
         
         //check if this is checked or not
-        
-        
+        NSMenuItem* item = [interfacesMenu itemWithTitle:[thisInterface Name]];
+        if([item state]==NSOnState)
+        {
+            [self UpdateProxy:[thisInterface Source] WithUrl:url Authorisation:myAuthorizationRef];
+        }
     }
+    
+    AuthorizationFree(myAuthorizationRef, kAuthorizationFlagDefaults);
 }
 
--(IBAction)helloWorld:(id)sender{
-    /*
-
+- (Boolean) UpdateProxy: (NSString*)interface WithUrl:(NSString*)url Authorisation:(AuthorizationRef)myAuthorizationRef
+{
+    Boolean result = false;
+    
+    SCPreferencesRef session = SCPreferencesCreateWithAuthorization(nil, CFSTR("MillsyProxy"), nil, myAuthorizationRef);
+    Boolean lock = SCPreferencesLock(session, TRUE);
+    if(lock)
+    {
+        NSString* path = [NSString stringWithFormat:@"/NetworkServices/%@/Proxies", interface];
         
-        CFPropertyListRef props2 = SCDynamicStoreCopyValue(store, CFSTR("State:/Network/Service"));
-        if(props2)
+        CFDictionaryRef aProxy = SCPreferencesPathGetValue(session, (CFStringRef)path);
+        
+        //CFStringRef outKeys[CFDictionaryGetCount(aProxy)];
+        //CFStringRef outValues[CFDictionaryGetCount(aProxy)];
+        //CFDictionaryGetKeysAndValues(aProxy, (const void**)&outKeys, (const void**)&outValues);
+        
+        //for(int i = 0; i < CFDictionaryGetCount(aProxy); i++){
+        //    NSLog(@"%@ %@\n", outKeys[i], CFDictionaryGetValue(aProxy, outKeys[i]));
+        //}
+        
+        if(aProxy)
         {
+            CFMutableDictionaryRef dict = CFDictionaryCreateMutableCopy(NULL, 0, aProxy);
             
+            int intValue = 1;
             
-            //get the auto config info
-            //CFStringRef autoConfig = (CFStringRef)CFDictionaryGetValue(props2, kSCPropNetProxiesProxyAutoConfigEnable);
-            //CFStringRef autoConfigURL = (CFStringRef)CFDictionaryGetValue(props2, kSCPropNetProxiesProxyAutoConfigURLString);
-            
-            if(true)//autoConfig && autoConfigURL)
+            if(url == nil)
             {
-                //auto config is set
-                CFArrayRef interfaces = SCNetworkInterfaceCopyAll();
-                CFIndex size = CFArrayGetCount(interfaces);
-                
-                for(int i = 0; i < size; i++)
-                    {
-                    SCNetworkInterfaceRef interface = CFArrayGetValueAtIndex(interfaces, i);
-                    CFDictionaryRef config = SCNetworkInterfaceGetConfiguration(interface);
-                    if(config){
-                        CFStringRef outKeys[CFDictionaryGetCount(config)];
-                        CFStringRef outValues[CFDictionaryGetCount(config)];
-                        CFDictionaryGetKeysAndValues(config, (const void**)&outKeys, (const void**)&outValues);
-                        
-                        NSLog(@"%@", SCNetworkInterfaceGetLocalizedDisplayName(interface));
-                        
-                        for(int i = 0; i < CFDictionaryGetCount(config); i++){
-                            NSLog(@"%@ %@\n", outKeys[i], CFDictionaryGetValue(config, outKeys[i]));
-                        }
-                    
-                    }
-                }
-                
-                CFRelease(interfaces);
+                intValue = 0;
             }
-            else
-            {
-                
-                AuthorizationRef myAuthorizationRef;
-                
-                // Get the authorization
-                OSStatus err = AuthorizationCreate(NULL, kAuthorizationEmptyEnvironment, kAuthorizationFlagDefaults, &myAuthorizationRef);
-                if (err != errAuthorizationSuccess) NSLog(@"Auth failed");
-                
-                AuthorizationItem myItems = {kAuthorizationRightExecute, 0, NULL, 0};
-                AuthorizationRights myRights = {1, &myItems};
-                AuthorizationFlags myFlags = kAuthorizationFlagInteractionAllowed | kAuthorizationFlagPreAuthorize | kAuthorizationFlagExtendRights;
-                
-                err = AuthorizationCopyRights(myAuthorizationRef, &myRights, NULL, myFlags, NULL);
-                if (err != errAuthorizationSuccess) {
-                    NSLog(@"Failed auth");
-                    return;
-                }
-                
-                SCPreferencesRef session = SCPreferencesCreateWithAuthorization(nil, CFSTR("ProgName"), nil, myAuthorizationRef);
-                Boolean lock = SCPreferencesLock(session, TRUE);
-                if(lock)
-                {
-                    CFStringRef path = CFStringCreateWithCString(NULL, "/NetworkServices/75F97D0E-946C-48AD-ABF2-900BD7565897/Proxies", kCFStringEncodingASCII);
-
-                    CFDictionaryRef aProxy = SCPreferencesPathGetValue(session, path);
-                    
-                    CFStringRef outKeys[CFDictionaryGetCount(aProxy)];
-                    CFStringRef outValues[CFDictionaryGetCount(aProxy)];
-                    CFDictionaryGetKeysAndValues(aProxy, (const void**)&outKeys, (const void**)&outValues);
-                    
-                    for(int i = 0; i < CFDictionaryGetCount(aProxy); i++){
-                        NSLog(@"%@ %@\n", outKeys[i], CFDictionaryGetValue(aProxy, outKeys[i]));
-                    }
-                    
-                    CFMutableDictionaryRef dict = CFDictionaryCreateMutableCopy(NULL, 0, aProxy);
-                    
-                    int intValue = 1;
-                    CFNumberRef enabled = CFNumberCreate(NULL, kCFNumberIntType, &intValue);
-                    CFDictionarySetValue(dict, CFSTR("ProxyAutoConfigEnable"), enabled);
-                    CFDictionarySetValue(dict, CFSTR("ProxyAutoConfigURLString"), CFSTR("http://anotherurl.pac"));
-                    
-                    SCPreferencesPathSetValue(session, path, dict);
-                    
-                    Boolean commit = SCPreferencesCommitChanges(session);
-                    if(commit){
-                        Boolean apply = SCPreferencesApplyChanges(session);
-                        if(!apply){
-                            NSLog(@"Failed to apply changes %@", SCCopyLastError());
-                        }
-                    }else{
-                        NSLog(@"Failed to commit changes %@", SCCopyLastError());
-                    }
-                    
-                    SCPreferencesUnlock(session);
-                    
-                    CFRelease(enabled);
-                    CFRelease(dict);
-                    CFRelease(path);
+            
+            CFNumberRef enabled = CFNumberCreate(NULL, kCFNumberIntType, &intValue);
+            CFDictionarySetValue(dict, CFSTR("ProxyAutoConfigEnable"), enabled);
+            if(intValue == 1){
+                CFDictionarySetValue(dict, CFSTR("ProxyAutoConfigURLString"), url);
+            }
+            SCPreferencesPathSetValue(session, (CFStringRef)path, dict);
+            
+            Boolean commit = SCPreferencesCommitChanges(session);
+            if(commit){
+                Boolean apply = SCPreferencesApplyChanges(session);
+                if(!apply){
+                    CFErrorRef err = SCCopyLastError();
+                    NSLog(@"Failed to apply changes %@", err);
+                    CFRelease(err);
                 }else{
-                    NSLog(@"Failed to get lock %@", SCCopyLastError());
+                    result = true;
                 }
-                CFRelease(session);
-                
-                AuthorizationFree(myAuthorizationRef, kAuthorizationFlagDefaults);
-            }            
+            }else{
+                CFErrorRef err = SCCopyLastError();
+                NSLog(@"Failed to commit changes %@", err);
+                CFRelease(err);
+            }
+            
+            CFRelease(enabled);
+            CFRelease(dict);
+        }else{
+            NSLog(@"Failed to find path %@", path);
         }
-        CFRelease(props2);
+        SCPreferencesUnlock(session);
+    }else{
+        CFErrorRef err = SCCopyLastError();
+        NSLog(@"Failed to get lock %@", err);
+        CFRelease(err);
     }
-    CFRelease(store);
-     */
+    
+    CFRelease(session);
+    
+    return result;
+}
+
+-(IBAction)helloWorld:(id)sender
+{
 }
 @end

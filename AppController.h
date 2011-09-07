@@ -17,17 +17,22 @@
     IBOutlet NSMenuItem *clearProxy;
     IBOutlet NSMenuItem *setProxy;
     IBOutlet NSWindow *setProxyWindow;
+    IBOutlet NSTextField *urlField;
+    IBOutlet NSButton *btnOk;
+    IBOutlet NSButton *btnCancel;
     
     NSMutableArray* interfaces;
 }
 
 
 -(IBAction)helloWorld:(id)sender;
-
+-(IBAction)Close:(id)sender;
 -(IBAction)EnableDisable:(id)sender;
 -(IBAction)ClearProxy:(id)sender;
--(IBAction)SetProxy:(id)sender;
+-(IBAction)ShowProxyWindow:(id)sender;
 
 - (NSMutableArray*) GetInterfacesForMenu;
+- (void) SetProxiesForInterfaces: (NSString*) url;
+- (Boolean) UpdateProxy: (NSString*)interface WithUrl:(NSString*)url Authorisation:(AuthorizationRef)myAuthorizationRef;
 
 @end

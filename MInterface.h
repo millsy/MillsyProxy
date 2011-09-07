@@ -13,6 +13,7 @@
     NSString* name;
     NSString* source;
     NSString* path;
+    Boolean checked;
 }
 
 - (NSString*) Name;
@@ -21,6 +22,10 @@
 
 - (NSString*) Path;
 
+- (Boolean) IsChecked;
+
 - (void) Setup: (NSString*)InterfaceName Path:(NSString*)InterfacePath;
+
+- (void) Checked:(Boolean)status;
 
 @end

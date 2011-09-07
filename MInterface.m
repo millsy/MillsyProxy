@@ -18,6 +18,7 @@
         name = @"";
         path = @"";
         source = @"";
+        checked = false;
     }
     
     return self;
@@ -35,6 +36,10 @@
     return source;
 }
 
+- (Boolean) IsChecked {
+    return checked;
+}
+
 - (void) Setup: (NSString*)InterfaceName Path:(NSString*)InterfacePath{
     [name autorelease];
     [path autorelease];
@@ -42,15 +47,31 @@
     name = [InterfaceName retain];
     path = [InterfacePath retain];
     
+    NSUserDefaults *preferences = [[NSUserDefaults standardUserDefaults] retain];
+    if([preferences boolForKey:name])
+    {
+        checked = [preferences boolForKey:name];
+    }
+    [preferences release];
+    
     NSRange sourceRange = [path rangeOfString:@"/" options:NSBackwardsSearch];
     
     if(sourceRange.length > 0)
     {
-        source = [path substringFromIndex:sourceRange.location + 1];
+        source = [[path substringFromIndex:(sourceRange.location + 1)] retain];        
     }else
     {
         source = @"Not set";
     }
+}
+
+- (void) Checked:(Boolean)status
+{
+    checked = status;
+    NSUserDefaults *preferences = [[NSUserDefaults standardUserDefaults] retain];
+    [preferences setBool:status forKey:name];
+    [preferences synchronize];
+    [preferences release];
 }
 
 @end
