@@ -61,6 +61,67 @@
         }
         [interfacesMenu addItem:testItem];
     }
+    
+    [self GetAllRecents];
+}
+
+-(IBAction)ApplyRecent:(id)sender
+{
+    NSMenuItem* item = sender;
+    [self SetProxiesForInterfaces:[item title]];
+}
+
+- (void) GetAllRecents
+{
+    NSUserDefaults *preferences = [[NSUserDefaults standardUserDefaults] retain];
+    NSMutableArray* dict = [preferences objectForKey:@"recents"];
+    if(dict)
+    {
+        NSEnumerator * enumerator = [dict objectEnumerator];
+        id element;
+        
+        while(element = [enumerator nextObject])
+        {
+            NSString* url = element;
+            //recentsMenu
+            [self AddRecentItem:url];
+        }
+    }else{
+        [recentsMenuItem setEnabled:NO];
+    }
+}
+
+- (void) AddRecent: (NSString*) url
+{
+    NSUserDefaults *preferences = [[NSUserDefaults standardUserDefaults] retain];
+    NSMutableArray* dict = [preferences objectForKey:@"recents"];
+    if(!dict)
+    {
+        dict = [NSMutableArray array];
+    }
+    
+    [dict addObject:url];
+    
+    [self AddRecentItem:url];
+    
+    [preferences setObject:dict forKey:@"recents"];
+    
+    [preferences synchronize];
+    
+    [preferences release];
+}
+
+-(void)AddRecentItem:(NSString*) url
+{
+    if(![recentsMenuItem isEnabled])
+    {
+        [recentsMenuItem setEnabled:YES];
+    }
+    
+    NSMenuItem *testItem = [[[NSMenuItem alloc] initWithTitle:url action:@selector(ApplyRecent:) keyEquivalent:@""] autorelease];
+    [testItem setTarget:self];
+    [testItem setEnabled:TRUE];    
+    [recentsMenu addItem:testItem];
 }
 
 -(IBAction)ShowHelpAbout:(id)sender
@@ -168,6 +229,7 @@
     [setProxyWindow orderOut:self];
     NSString* url = [[urlField stringValue] retain];
     [self SetProxiesForInterfaces:url];
+    [self AddRecent:url];
     [url release];
 }
 
