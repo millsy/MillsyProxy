@@ -22,6 +22,7 @@
     IBOutlet NSTextField *urlField;
     IBOutlet NSButton *btnOk;
     IBOutlet NSButton *btnCancel;
+    IBOutlet NSTextField *errorMsg;
     
     NSMutableArray* interfaces;
 }

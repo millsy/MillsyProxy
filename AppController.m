@@ -89,6 +89,8 @@
     }else{
         [recentsMenuItem setEnabled:NO];
     }
+    
+    [preferences release];
 }
 
 - (void) AddRecent: (NSString*) url
@@ -226,15 +228,29 @@
 
 -(IBAction)SaveNewProxy:(id)sender
 {
-    [setProxyWindow orderOut:self];
     NSString* url = [[urlField stringValue] retain];
-    [self SetProxiesForInterfaces:url];
-    [self AddRecent:url];
+    
+    //validate proxy url here
+    NSURL* validURL = [NSURL URLWithString:[url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    if(validURL && [validURL scheme] && [validURL host] && ([[validURL path]length]> 0) && ([[validURL pathExtension]length]> 0))
+    { 
+        //url is valid
+        //[setProxyWindow orderOut:self];
+        [self Close:nil];
+        [self SetProxiesForInterfaces:url];
+        [self AddRecent:url];
+    }else
+    {
+        [errorMsg setStringValue:@"Invalid URL (http(s)://server/file.pac)"];
+    }
+    
     [url release];
 }
 
 -(IBAction)Close:(id)sender
 {
+    [urlField setStringValue:@""];
+    [errorMsg setStringValue:@""];
     [setProxyWindow orderOut:self];
 }
 
