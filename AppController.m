@@ -121,8 +121,20 @@
             
             MInterface *newInterface = [MInterface alloc];
             [newInterface Setup:(NSString*)name Path:CFArrayGetValueAtIndex(services, i)];
-            [names addObject:newInterface];
             
+            NSString* newPath = [NSString stringWithFormat:@"%@/Interface", CFArrayGetValueAtIndex(services, i)];
+            CFPropertyListRef moreProps = SCDynamicStoreCopyValue(store, (CFStringRef)newPath);
+            if(moreProps){
+                CFStringRef type = CFDictionaryGetValue(moreProps, kSCPropNetInterfaceType);
+                if(CFStringCompare(type, kSCNetworkInterfaceTypeEthernet, 0) == kCFCompareEqualTo || CFStringCompare(type, kSCNetworkInterfaceTypeIEEE80211, 0) == kCFCompareEqualTo)
+                {
+                    [names addObject:newInterface];
+                }else{
+                    [newInterface release];
+                }
+                
+                CFRelease(moreProps);
+            }
             CFRelease(name);
             CFRelease(props);
         }
