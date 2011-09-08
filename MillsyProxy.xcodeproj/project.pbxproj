@@ -12,6 +12,7 @@
 		8324A997140F47B3006C663C /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8324A996140F47B3006C663C /* Security.framework */; };
 		8336A5C614177BB00041A796 /* MInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 8336A5C514177BB00041A796 /* MInterface.m */; };
 		83CFB5131417D33F00961FD6 /* EventHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CFB5121417D33F00961FD6 /* EventHandler.m */; };
+		83CFB5161417F77900961FD6 /* proxy-lg.png in Resources */ = {isa = PBXBuildFile; fileRef = 83CFB5151417F77900961FD6 /* proxy-lg.png */; };
 		83F804AE140E5D280056A15A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83F804AD140E5D280056A15A /* Cocoa.framework */; };
 		83F804B8140E5D280056A15A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 83F804B6140E5D280056A15A /* InfoPlist.strings */; };
 		83F804BA140E5D280056A15A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F804B9140E5D280056A15A /* main.m */; };
@@ -30,6 +31,7 @@
 		8336A5C514177BB00041A796 /* MInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MInterface.m; sourceTree = "<group>"; };
 		83CFB5111417D33F00961FD6 /* EventHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventHandler.h; sourceTree = "<group>"; };
 		83CFB5121417D33F00961FD6 /* EventHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventHandler.m; sourceTree = "<group>"; };
+		83CFB5151417F77900961FD6 /* proxy-lg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "proxy-lg.png"; sourceTree = SOURCE_ROOT; };
 		83F804A9140E5D280056A15A /* MillsyProxy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MillsyProxy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		83F804AD140E5D280056A15A /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		83F804B0140E5D280056A15A /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -66,6 +68,7 @@
 		83F8049E140E5D280056A15A = {
 			isa = PBXGroup;
 			children = (
+				83CFB5151417F77900961FD6 /* proxy-lg.png */,
 				83CFB5111417D33F00961FD6 /* EventHandler.h */,
 				83CFB5121417D33F00961FD6 /* EventHandler.m */,
 				8336A5C414177BB00041A796 /* MInterface.h */,
@@ -183,6 +186,7 @@
 				83F804BE140E5D280056A15A /* Credits.rtf in Resources */,
 				83F804C4140E5D280056A15A /* MainMenu.xib in Resources */,
 				83F804CE140E5ECB0056A15A /* proxy.png in Resources */,
+				83CFB5161417F77900961FD6 /* proxy-lg.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -283,6 +287,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MillsyProxy/MillsyProxy-Prefix.pch";
 				INFOPLIST_FILE = "MillsyProxy/MillsyProxy-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -295,6 +300,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MillsyProxy/MillsyProxy-Prefix.pch";
 				INFOPLIST_FILE = "MillsyProxy/MillsyProxy-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
