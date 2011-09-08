@@ -30,6 +30,7 @@
 -(IBAction)EnableDisable:(id)sender;
 -(IBAction)ClearProxy:(id)sender;
 -(IBAction)ShowProxyWindow:(id)sender;
+-(IBAction)ShowHelpAbout:(id)sender;
 
 - (NSMutableArray*) GetInterfacesForMenu;
 - (void) SetProxiesForInterfaces: (NSString*) url;

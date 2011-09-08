@@ -24,9 +24,9 @@
     
     //Used to detect where our files are
     NSBundle *bundle = [NSBundle mainBundle];
-    
+        
     //Allocates and loads the images into the application which will be used for our NSStatusItem
-    statusImage = [[NSImage alloc] initWithContentsOfFile:[bundle pathForResource:@"proxy" ofType:@"png"]];
+    statusImage = [[NSImage alloc] initWithContentsOfFile:[bundle pathForResource:@"earth-sm" ofType:@"png"]];
     //statusHighlightImage = [[NSImage alloc] initWithContentsOfFile:[bundle pathForResource:@"icon-alt" ofType:@"png"]];
     
     //Sets the images in our NSStatusItem
@@ -38,7 +38,7 @@
     //Sets the tooptip for our item
     [statusItem setToolTip:@"Millsy Proxy"];
     //Enables highlighting
-    [statusItem setHighlightMode:NO];
+    [statusItem setHighlightMode:YES];
     
     [setProxyWindow makeFirstResponder:urlField];
    
@@ -61,6 +61,17 @@
         }
         [interfacesMenu addItem:testItem];
     }
+}
+
+-(IBAction)ShowHelpAbout:(id)sender
+{
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"ConfigProperties" ofType:@"plist"];    
+    NSMutableDictionary *templateDictionary = [NSMutableDictionary dictionaryWithContentsOfFile:path];
+    
+    NSURL *url = [ [ NSURL alloc ] initWithString: [templateDictionary valueForKey:@"Help.URL"]];
+    [[NSWorkspace sharedWorkspace] openURL:url];
+    
+    [url release];
 }
 
 -(IBAction)EnableDisable:(id)sender
