@@ -18,6 +18,7 @@
     IBOutlet NSMenuItem *recentsMenuItem;
     IBOutlet NSMenuItem *clearProxy;
     IBOutlet NSMenuItem *setProxy;
+    IBOutlet NSMenuItem *clearRecentMI;
     IBOutlet NSWindow *setProxyWindow;
     IBOutlet NSTextField *urlField;
     IBOutlet NSButton *btnOk;
@@ -28,13 +29,13 @@
 }
 
 
--(IBAction)helloWorld:(id)sender;
 -(IBAction)Close:(id)sender;
 -(IBAction)EnableDisable:(id)sender;
 -(IBAction)ClearProxy:(id)sender;
 -(IBAction)ShowProxyWindow:(id)sender;
 -(IBAction)ShowHelpAbout:(id)sender;
 -(IBAction)ApplyRecent:(id)sender;
+-(IBAction)ClearRecent:(id)sender;
 
 - (NSMutableArray*) GetInterfacesForMenu;
 - (void) SetProxiesForInterfaces: (NSString*) url;

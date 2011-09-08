@@ -11,8 +11,6 @@
 #include <CoreServices/CoreServices.h>
 #include <SystemConfiguration/SystemConfiguration.h>
 
-#include <SystemConfiguration/SCDynamicStore.h>
-#include <Security/Security.h>
 #include "MInterface.h"
 
 @implementation AppController
@@ -86,11 +84,29 @@
             //recentsMenu
             [self AddRecentItem:url];
         }
+        
+        [clearRecentMI setEnabled:YES];
     }else{
         [recentsMenuItem setEnabled:NO];
     }
     
     [preferences release];
+}
+
+-(IBAction)ClearRecent:(id)sender
+{
+    NSUserDefaults *preferences = [[NSUserDefaults standardUserDefaults] retain];
+
+    [preferences removeObjectForKey:@"recents"];
+    
+    [preferences synchronize];
+    
+    [preferences release];
+    
+    [recentsMenu removeAllItems];
+    
+    [clearRecentMI setEnabled:NO];
+    [recentsMenuItem setEnabled:NO];
 }
 
 - (void) AddRecent: (NSString*) url
@@ -105,6 +121,8 @@
     [dict addObject:url];
     
     [self AddRecentItem:url];
+    
+    [clearRecentMI setEnabled:YES];
     
     [preferences setObject:dict forKey:@"recents"];
     
@@ -192,14 +210,14 @@
                 if(CFStringCompare(type, kSCNetworkInterfaceTypeEthernet, 0) == kCFCompareEqualTo || CFStringCompare(type, kSCNetworkInterfaceTypeIEEE80211, 0) == kCFCompareEqualTo)
                 {
                     [names addObject:newInterface];
-                }else{
-                    [newInterface release];
                 }
                 
                 CFRelease(moreProps);
             }
+            
             CFRelease(name);
             CFRelease(props);
+            CFRelease(newInterface);
         }
         CFRelease(services);
         CFRelease(store);
@@ -210,6 +228,7 @@
 - (void) dealloc {
     //Releases the 2 images we loaded into memory
     [statusImage release];
+    [interfaces release];
     //[statusHighlightImage release];
     [super dealloc];
 }
@@ -361,7 +380,4 @@
     return result;
 }
 
--(IBAction)helloWorld:(id)sender
-{
-}
 @end
