@@ -194,7 +194,7 @@
         
         for(int i = 0; i < CFArrayGetCount(services); i++){
             CFPropertyListRef props = SCDynamicStoreCopyValue(store, CFArrayGetValueAtIndex(services, i));
-            NSLog(@"%@", CFDictionaryGetValue(props, kSCPropUserDefinedName));
+            DLOG(@"%@", CFDictionaryGetValue(props, kSCPropUserDefinedName));
             
             //serviceNames[i] = ;
             CFStringRef name = CFStringCreateCopy(NULL, CFDictionaryGetValue(props, kSCPropUserDefinedName));
@@ -279,7 +279,7 @@
     
     // Get the authorization
     OSStatus err = AuthorizationCreate(NULL, kAuthorizationEmptyEnvironment, kAuthorizationFlagDefaults, &myAuthorizationRef);
-    if (err != errAuthorizationSuccess) NSLog(@"Auth failed");
+    if (err != errAuthorizationSuccess) DLOG(@"Auth failed");
     
     AuthorizationItem myItems = {kAuthorizationRightExecute, 0, NULL, 0};
     AuthorizationRights myRights = {1, &myItems};
@@ -287,7 +287,7 @@
     
     err = AuthorizationCopyRights(myAuthorizationRef, &myRights, NULL, myFlags, NULL);
     if (err != errAuthorizationSuccess) {
-        NSLog(@"Failed auth");
+        DLOG(@"Failed auth");
         return;
     }
     
@@ -352,26 +352,26 @@
                 Boolean apply = SCPreferencesApplyChanges(session);
                 if(!apply){
                     CFErrorRef err = SCCopyLastError();
-                    NSLog(@"Failed to apply changes %@", err);
+                    DLOG(@"Failed to apply changes %@", err);
                     CFRelease(err);
                 }else{
                     result = true;
                 }
             }else{
                 CFErrorRef err = SCCopyLastError();
-                NSLog(@"Failed to commit changes %@", err);
+                DLOG(@"Failed to commit changes %@", err);
                 CFRelease(err);
             }
             
             CFRelease(enabled);
             CFRelease(dict);
         }else{
-            NSLog(@"Failed to find path %@", path);
+            DLOG(@"Failed to find path %@", path);
         }
         SCPreferencesUnlock(session);
     }else{
         CFErrorRef err = SCCopyLastError();
-        NSLog(@"Failed to get lock %@", err);
+        DLOG(@"Failed to get lock %@", err);
         CFRelease(err);
     }
     
