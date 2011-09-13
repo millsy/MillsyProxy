@@ -101,6 +101,7 @@
 			if (LSSharedFileListItemResolve(itemRef, 0, (CFURLRef*) &url, NULL) == noErr) {
 				NSString * urlPath = [(NSURL*)url path];
 				if ([urlPath compare:appPath] == NSOrderedSame){
+                    [loginItemsArray release];
                     return true;
                 }
             }
