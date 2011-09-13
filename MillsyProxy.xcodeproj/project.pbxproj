@@ -14,6 +14,10 @@
 		836600701418B64900369E48 /* earth-sm.png in Resources */ = {isa = PBXBuildFile; fileRef = 8366006F1418B64900369E48 /* earth-sm.png */; };
 		836600731418B99F00369E48 /* earth.icns in Resources */ = {isa = PBXBuildFile; fileRef = 836600721418B99F00369E48 /* earth.icns */; };
 		836600751418C1D400369E48 /* ConfigProperties.plist in Resources */ = {isa = PBXBuildFile; fileRef = 836600741418C1D400369E48 /* ConfigProperties.plist */; };
+		8375377C141F63C00071E8EB /* Growl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8375377B141F63C00071E8EB /* Growl.framework */; };
+		8375377E141F64260071E8EB /* Growl.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8375377B141F63C00071E8EB /* Growl.framework */; };
+		83753780141F65200071E8EB /* Growl Registration Ticket.growlRegDict in Resources */ = {isa = PBXBuildFile; fileRef = 8375377F141F65200071E8EB /* Growl Registration Ticket.growlRegDict */; };
+		83753783141F665A0071E8EB /* GrowlHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 83753782141F665A0071E8EB /* GrowlHandler.m */; };
 		83C44576141941BE001F05B2 /* LoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83C44575141941BE001F05B2 /* LoginController.m */; };
 		83CFB5131417D33F00961FD6 /* EventHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CFB5121417D33F00961FD6 /* EventHandler.m */; };
 		83F804AE140E5D280056A15A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83F804AD140E5D280056A15A /* Cocoa.framework */; };
@@ -25,6 +29,19 @@
 		83F804CC140E5D850056A15A /* AppController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F804CB140E5D850056A15A /* AppController.m */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		8375377D141F64070071E8EB /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				8375377E141F64260071E8EB /* Growl.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		8324A990140E9D42006C663C /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		8324A993140E9D56006C663C /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
@@ -34,6 +51,10 @@
 		8366006F1418B64900369E48 /* earth-sm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "earth-sm.png"; sourceTree = "<group>"; };
 		836600721418B99F00369E48 /* earth.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = earth.icns; sourceTree = "<group>"; };
 		836600741418C1D400369E48 /* ConfigProperties.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = ConfigProperties.plist; path = ../ConfigProperties.plist; sourceTree = "<group>"; };
+		8375377B141F63C00071E8EB /* Growl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Growl.framework; sourceTree = "<group>"; };
+		8375377F141F65200071E8EB /* Growl Registration Ticket.growlRegDict */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Growl Registration Ticket.growlRegDict"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.xml; };
+		83753781141F665A0071E8EB /* GrowlHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GrowlHandler.h; sourceTree = "<group>"; };
+		83753782141F665A0071E8EB /* GrowlHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GrowlHandler.m; sourceTree = "<group>"; };
 		83C44574141941BE001F05B2 /* LoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginController.h; sourceTree = "<group>"; };
 		83C44575141941BE001F05B2 /* LoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginController.m; sourceTree = "<group>"; };
 		83CFB5111417D33F00961FD6 /* EventHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventHandler.h; sourceTree = "<group>"; };
@@ -64,6 +85,7 @@
 				8324A994140E9D56006C663C /* CoreServices.framework in Frameworks */,
 				8324A991140E9D42006C663C /* SystemConfiguration.framework in Frameworks */,
 				83F804AE140E5D280056A15A /* Cocoa.framework in Frameworks */,
+				8375377C141F63C00071E8EB /* Growl.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -77,6 +99,17 @@
 				8366006F1418B64900369E48 /* earth-sm.png */,
 			);
 			name = Images;
+			sourceTree = "<group>";
+		};
+		83753779141F63A10071E8EB /* Growl */ = {
+			isa = PBXGroup;
+			children = (
+				8375377B141F63C00071E8EB /* Growl.framework */,
+				8375377F141F65200071E8EB /* Growl Registration Ticket.growlRegDict */,
+				83753781141F665A0071E8EB /* GrowlHandler.h */,
+				83753782141F665A0071E8EB /* GrowlHandler.m */,
+			);
+			name = Growl;
 			sourceTree = "<group>";
 		};
 		83C4457114194139001F05B2 /* Controllers */ = {
@@ -104,6 +137,7 @@
 		83F8049E140E5D280056A15A = {
 			isa = PBXGroup;
 			children = (
+				83753779141F63A10071E8EB /* Growl */,
 				83C4457314194195001F05B2 /* Custom */,
 				83C4457114194139001F05B2 /* Controllers */,
 				831EBE2914189BF400152A2B /* Images */,
@@ -177,6 +211,7 @@
 				83F804A5140E5D280056A15A /* Sources */,
 				83F804A6140E5D280056A15A /* Frameworks */,
 				83F804A7140E5D280056A15A /* Resources */,
+				8375377D141F64070071E8EB /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -220,6 +255,7 @@
 				836600701418B64900369E48 /* earth-sm.png in Resources */,
 				836600731418B99F00369E48 /* earth.icns in Resources */,
 				836600751418C1D400369E48 /* ConfigProperties.plist in Resources */,
+				83753780141F65200071E8EB /* Growl Registration Ticket.growlRegDict in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -236,6 +272,7 @@
 				8336A5C614177BB00041A796 /* MInterface.m in Sources */,
 				83CFB5131417D33F00961FD6 /* EventHandler.m in Sources */,
 				83C44576141941BE001F05B2 /* LoginController.m in Sources */,
+				83753783141F665A0071E8EB /* GrowlHandler.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -319,6 +356,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MillsyProxy/MillsyProxy-Prefix.pch";
 				INFOPLIST_FILE = "MillsyProxy/MillsyProxy-Info.plist";
@@ -333,6 +374,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MillsyProxy/MillsyProxy-Prefix.pch";
 				INFOPLIST_FILE = "MillsyProxy/MillsyProxy-Info.plist";

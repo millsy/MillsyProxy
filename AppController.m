@@ -39,7 +39,10 @@
     [statusItem setHighlightMode:YES];
     
     [setProxyWindow makeFirstResponder:urlField];
-   
+    
+    //setup growl
+    growlHandler = [[[GrowlHandler new]init]autorelease];
+    
     interfaces = [[self GetInterfacesForMenu]retain];
     NSEnumerator * enumerator = [interfaces objectEnumerator];
     id element;
@@ -185,7 +188,7 @@
 {
     NSMutableArray *names = [NSMutableArray array];
     
-    SCDynamicStoreRef store = SCDynamicStoreCreate(nil,CFSTR("helloWorld"), nil, nil);
+    SCDynamicStoreRef store = SCDynamicStoreCreate(nil,CFSTR("millsyproxy"), nil, nil);
     if(store){
         CFArrayRef services = SCDynamicStoreCopyKeyList(store, CFSTR("^Setup:/Network/Service/[A-F0-9-]*$"));
         //check we have the proxy info
@@ -229,6 +232,7 @@
     //Releases the 2 images we loaded into memory
     [statusImage release];
     [interfaces release];
+    [growlHandler release];
     //[statusHighlightImage release];
     [super dealloc];
 }
@@ -261,6 +265,7 @@
     }else
     {
         [errorMsg setStringValue:@"Invalid URL (http(s)://server/file.pac)"];
+        [growlHandler ProxySettingsFailed:@" invalid URL"];
     }
     
     [url release];
@@ -279,7 +284,11 @@
     
     // Get the authorization
     OSStatus err = AuthorizationCreate(NULL, kAuthorizationEmptyEnvironment, kAuthorizationFlagDefaults, &myAuthorizationRef);
-    if (err != errAuthorizationSuccess) DLOG(@"Auth failed");
+    if (err != errAuthorizationSuccess){
+        DLOG(@"Auth failed");
+        [growlHandler ProxySettingsFailed:@" Authentication failed"];
+        return;
+    }
     
     AuthorizationItem myItems = {kAuthorizationRightExecute, 0, NULL, 0};
     AuthorizationRights myRights = {1, &myItems};
@@ -288,6 +297,7 @@
     err = AuthorizationCopyRights(myAuthorizationRef, &myRights, NULL, myFlags, NULL);
     if (err != errAuthorizationSuccess) {
         DLOG(@"Failed auth");
+        [growlHandler ProxySettingsFailed:@" Authentication failed"];
         return;
     }
     
@@ -353,13 +363,16 @@
                 if(!apply){
                     CFErrorRef err = SCCopyLastError();
                     DLOG(@"Failed to apply changes %@", err);
+                    [growlHandler ProxySettingsFailed:@" failed to apply changes"];
                     CFRelease(err);
                 }else{
+                    [growlHandler ProxySettingsApplied];
                     result = true;
                 }
             }else{
                 CFErrorRef err = SCCopyLastError();
                 DLOG(@"Failed to commit changes %@", err);
+                [growlHandler ProxySettingsFailed:@" failed to commit changes"];
                 CFRelease(err);
             }
             
@@ -367,11 +380,13 @@
             CFRelease(dict);
         }else{
             DLOG(@"Failed to find path %@", path);
+            [growlHandler ProxySettingsFailed:@" failed to find path"];
         }
         SCPreferencesUnlock(session);
     }else{
         CFErrorRef err = SCCopyLastError();
         DLOG(@"Failed to get lock %@", err);
+        [growlHandler ProxySettingsFailed:@" failed to get preferences lock"];
         CFRelease(err);
     }
     

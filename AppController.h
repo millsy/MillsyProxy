@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "GrowlHandler.h"
 
 @interface AppController : NSObject
 {
@@ -26,6 +27,8 @@
     IBOutlet NSTextField *errorMsg;
     
     NSMutableArray* interfaces;
+    
+    GrowlHandler* growlHandler;
 }
 
 

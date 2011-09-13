@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+ Growl Registration Ticket.growlRegDict
+ -->
+<plist version="1.0">
+    <dict>
+		<key>TicketVersion</key>
+		<integer>1</integer>
+		<key>AllNotifications</key>
+		<array>
+			<string>Proxy Settings Applied</string>
+            <string>Proxy Settings Failed</string>
+		</array>
+		<key>DefaultNotifications</key>
+		<array>
+			<string>Proxy Settings Applied</string>
+            <string>Proxy Settings Failed</string>
+		</array>
+    </dict>
+</plist>
