@@ -269,8 +269,10 @@
                 [NetworkSetupWrapper SetProxy:url forInterface:[thisInterface Name]];
                 //this call is not required as setting the URL auto activates
                 //[NetworkSetupWrapper SetProxyInterface: [thisInterface Name] State:@"on"];
+                [growlHandler ProxySettingsApplied];
             }else{
                 [NetworkSetupWrapper SetProxyInterface: [thisInterface Name] State:@"off"];
+                [growlHandler ProxySettingsCleared];
             }
         }
     }

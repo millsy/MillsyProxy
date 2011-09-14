@@ -11,11 +11,13 @@
 		<array>
 			<string>Proxy Settings Applied</string>
             <string>Proxy Settings Failed</string>
+            <string>Proxy Settings Cleared</string>
 		</array>
 		<key>DefaultNotifications</key>
 		<array>
 			<string>Proxy Settings Applied</string>
             <string>Proxy Settings Failed</string>
+            <string>Proxy Settings Cleared</string>
 		</array>
     </dict>
 </plist>

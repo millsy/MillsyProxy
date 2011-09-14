@@ -10,7 +10,7 @@
 
 static NSString *const PROXY_SETTINGS_APPLIED = @"Proxy Settings Applied";
 static NSString *const PROXY_SETTINGS_FAILED = @"Proxy Settings Failed";
-
+static NSString *const PROXY_SETTINGS_CLEARED = @"Proxy Settings Cleared";
 
 @implementation GrowlHandler
 
@@ -24,6 +24,16 @@ static NSString *const PROXY_SETTINGS_FAILED = @"Proxy Settings Failed";
     }
     
     return self;
+}
+
+-(void) ProxySettingsCleared{
+    [GrowlApplicationBridge notifyWithTitle:PROXY_SETTINGS_CLEARED
+								description:PROXY_SETTINGS_CLEARED
+						   notificationName:PROXY_SETTINGS_CLEARED
+								   iconData:nil
+								   priority:0
+								   isSticky:NO
+							   clickContext:nil];    
 }
 
 -(void) ProxySettingsApplied{

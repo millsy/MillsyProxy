@@ -16,5 +16,6 @@
 
 -(void) ProxySettingsApplied;
 -(void) ProxySettingsFailed:(NSString*)reason;
+-(void) ProxySettingsCleared;
 
 @end
