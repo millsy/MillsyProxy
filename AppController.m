@@ -194,6 +194,7 @@
             MInterface *newInterface = [MInterface alloc];
             [newInterface Setup:[myArray objectAtIndex:i]];
             [names addObject:newInterface];
+            [newInterface release];
         }
     }
 
@@ -266,7 +267,8 @@
             if(url)
             {
                 [NetworkSetupWrapper SetProxy:url forInterface:[thisInterface Name]];
-                [NetworkSetupWrapper SetProxyInterface: [thisInterface Name] State:@"on"];
+                //this call is not required as setting the URL auto activates
+                //[NetworkSetupWrapper SetProxyInterface: [thisInterface Name] State:@"on"];
             }else{
                 [NetworkSetupWrapper SetProxyInterface: [thisInterface Name] State:@"off"];
             }
