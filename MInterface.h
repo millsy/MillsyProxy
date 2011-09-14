@@ -11,20 +11,14 @@
 @interface MInterface : NSObject
 {
     NSString* name;
-    NSString* source;
-    NSString* path;
     Boolean checked;
 }
 
 - (NSString*) Name;
 
-- (NSString*) Source;
-
-- (NSString*) Path;
-
 - (Boolean) IsChecked;
 
-- (void) Setup: (NSString*)InterfaceName Path:(NSString*)InterfacePath;
+- (void) Setup: (NSString*)InterfaceName;
 
 - (void) Checked:(Boolean)status;
 

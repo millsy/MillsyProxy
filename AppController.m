@@ -12,6 +12,7 @@
 #include <SystemConfiguration/SystemConfiguration.h>
 
 #include "MInterface.h"
+#include "NetworkSetupWrapper.h"
 
 @implementation AppController
 
@@ -42,7 +43,7 @@
     
     //setup growl
     growlHandler = [[[GrowlHandler new]init]autorelease];
-    
+        
     interfaces = [[self GetInterfacesForMenu]retain];
     NSEnumerator * enumerator = [interfaces objectEnumerator];
     id element;
@@ -186,45 +187,16 @@
 
 - (NSMutableArray*) GetInterfacesForMenu
 {
-    NSMutableArray *names = [NSMutableArray array];
-    
-    SCDynamicStoreRef store = SCDynamicStoreCreate(nil,CFSTR("millsyproxy"), nil, nil);
-    if(store){
-        CFArrayRef services = SCDynamicStoreCopyKeyList(store, CFSTR("^Setup:/Network/Service/[A-F0-9-]*$"));
-        //check we have the proxy info
-        
-        //NSArray *names = [NSArray arrayWithObjects:@"", nil];
-        
-        for(int i = 0; i < CFArrayGetCount(services); i++){
-            CFPropertyListRef props = SCDynamicStoreCopyValue(store, CFArrayGetValueAtIndex(services, i));
-            DLOG(@"%@", CFDictionaryGetValue(props, kSCPropUserDefinedName));
-            
-            //serviceNames[i] = ;
-            CFStringRef name = CFStringCreateCopy(NULL, CFDictionaryGetValue(props, kSCPropUserDefinedName));
-            //[names addObject:(NSString *)name];
-            
+    NSMutableArray* names = [NSMutableArray array];
+    NSArray* myArray = [NetworkSetupWrapper GetInterfaces];
+    for(int i = 0; i < (int)[myArray count]; i++){
+        if([myArray objectAtIndex:i] != nil && [[myArray objectAtIndex:i]length] > 0 ){
             MInterface *newInterface = [MInterface alloc];
-            [newInterface Setup:(NSString*)name Path:CFArrayGetValueAtIndex(services, i)];
-            
-            NSString* newPath = [NSString stringWithFormat:@"%@/Interface", CFArrayGetValueAtIndex(services, i)];
-            CFPropertyListRef moreProps = SCDynamicStoreCopyValue(store, (CFStringRef)newPath);
-            if(moreProps){
-                CFStringRef type = CFDictionaryGetValue(moreProps, kSCPropNetInterfaceType);
-                if(CFStringCompare(type, kSCNetworkInterfaceTypeEthernet, 0) == kCFCompareEqualTo || CFStringCompare(type, kSCNetworkInterfaceTypeIEEE80211, 0) == kCFCompareEqualTo)
-                {
-                    [names addObject:newInterface];
-                }
-                
-                CFRelease(moreProps);
-            }
-            
-            CFRelease(name);
-            CFRelease(props);
-            CFRelease(newInterface);
+            [newInterface Setup:[myArray objectAtIndex:i]];
+            [names addObject:newInterface];
         }
-        CFRelease(services);
-        CFRelease(store);
     }
+
     return names;
 }
 
@@ -279,28 +251,7 @@
 }
 
 - (void) SetProxiesForInterfaces: (NSString*) url
-{
-    AuthorizationRef myAuthorizationRef;
-    
-    // Get the authorization
-    OSStatus err = AuthorizationCreate(NULL, kAuthorizationEmptyEnvironment, kAuthorizationFlagDefaults, &myAuthorizationRef);
-    if (err != errAuthorizationSuccess){
-        DLOG(@"Auth failed");
-        [growlHandler ProxySettingsFailed:@" Authentication failed"];
-        return;
-    }
-    
-    AuthorizationItem myItems = {kAuthorizationRightExecute, 0, NULL, 0};
-    AuthorizationRights myRights = {1, &myItems};
-    AuthorizationFlags myFlags = kAuthorizationFlagInteractionAllowed | kAuthorizationFlagPreAuthorize | kAuthorizationFlagExtendRights;
-    
-    err = AuthorizationCopyRights(myAuthorizationRef, &myRights, NULL, myFlags, NULL);
-    if (err != errAuthorizationSuccess) {
-        DLOG(@"Failed auth");
-        [growlHandler ProxySettingsFailed:@" Authentication failed"];
-        return;
-    }
-    
+{    
     NSEnumerator * enumerator = [interfaces objectEnumerator];
     id element;
     
@@ -312,87 +263,15 @@
         NSMenuItem* item = [interfacesMenu itemWithTitle:[thisInterface Name]];
         if([item state]==NSOnState)
         {
-            [self UpdateProxy:[thisInterface Source] WithUrl:url Authorisation:myAuthorizationRef];
-        }
-    }
-    
-    AuthorizationFree(myAuthorizationRef, kAuthorizationFlagDefaults);
-}
-
-- (Boolean) UpdateProxy: (NSString*)interface WithUrl:(NSString*)url Authorisation:(AuthorizationRef)myAuthorizationRef
-{
-    Boolean result = false;
-    
-    SCPreferencesRef session = SCPreferencesCreateWithAuthorization(nil, CFSTR("MillsyProxy"), nil, myAuthorizationRef);
-    Boolean lock = SCPreferencesLock(session, TRUE);
-    if(lock)
-    {
-        NSString* path = [NSString stringWithFormat:@"/NetworkServices/%@/Proxies", interface];
-        
-        CFDictionaryRef aProxy = SCPreferencesPathGetValue(session, (CFStringRef)path);
-        
-        //CFStringRef outKeys[CFDictionaryGetCount(aProxy)];
-        //CFStringRef outValues[CFDictionaryGetCount(aProxy)];
-        //CFDictionaryGetKeysAndValues(aProxy, (const void**)&outKeys, (const void**)&outValues);
-        
-        //for(int i = 0; i < CFDictionaryGetCount(aProxy); i++){
-        //    NSLog(@"%@ %@\n", outKeys[i], CFDictionaryGetValue(aProxy, outKeys[i]));
-        //}
-        
-        if(aProxy)
-        {
-            CFMutableDictionaryRef dict = CFDictionaryCreateMutableCopy(NULL, 0, aProxy);
-            
-            int intValue = 1;
-            
-            if(url == nil)
+            if(url)
             {
-                intValue = 0;
-            }
-            
-            CFNumberRef enabled = CFNumberCreate(NULL, kCFNumberIntType, &intValue);
-            CFDictionarySetValue(dict, CFSTR("ProxyAutoConfigEnable"), enabled);
-            if(intValue == 1){
-                CFDictionarySetValue(dict, CFSTR("ProxyAutoConfigURLString"), url);
-            }
-            SCPreferencesPathSetValue(session, (CFStringRef)path, dict);
-            
-            Boolean commit = SCPreferencesCommitChanges(session);
-            if(commit){
-                Boolean apply = SCPreferencesApplyChanges(session);
-                if(!apply){
-                    CFErrorRef err = SCCopyLastError();
-                    DLOG(@"Failed to apply changes %@", err);
-                    [growlHandler ProxySettingsFailed:@" failed to apply changes"];
-                    CFRelease(err);
-                }else{
-                    [growlHandler ProxySettingsApplied];
-                    result = true;
-                }
+                [NetworkSetupWrapper SetProxy:url forInterface:[thisInterface Name]];
+                [NetworkSetupWrapper SetProxyInterface: [thisInterface Name] State:@"on"];
             }else{
-                CFErrorRef err = SCCopyLastError();
-                DLOG(@"Failed to commit changes %@", err);
-                [growlHandler ProxySettingsFailed:@" failed to commit changes"];
-                CFRelease(err);
+                [NetworkSetupWrapper SetProxyInterface: [thisInterface Name] State:@"off"];
             }
-            
-            CFRelease(enabled);
-            CFRelease(dict);
-        }else{
-            DLOG(@"Failed to find path %@", path);
-            [growlHandler ProxySettingsFailed:@" failed to find path"];
         }
-        SCPreferencesUnlock(session);
-    }else{
-        CFErrorRef err = SCCopyLastError();
-        DLOG(@"Failed to get lock %@", err);
-        [growlHandler ProxySettingsFailed:@" failed to get preferences lock"];
-        CFRelease(err);
     }
-    
-    CFRelease(session);
-    
-    return result;
 }
 
 @end

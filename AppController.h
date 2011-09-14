@@ -42,7 +42,6 @@
 
 - (NSMutableArray*) GetInterfacesForMenu;
 - (void) SetProxiesForInterfaces: (NSString*) url;
-- (Boolean) UpdateProxy: (NSString*)interface WithUrl:(NSString*)url Authorisation:(AuthorizationRef)myAuthorizationRef;
 - (void) GetAllRecents;
 - (void) AddRecent: (NSString*) url;
 - (void)AddRecentItem:(NSString*) url;

@@ -11,6 +11,7 @@
 		8324A994140E9D56006C663C /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8324A993140E9D56006C663C /* CoreServices.framework */; };
 		8324A997140F47B3006C663C /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8324A996140F47B3006C663C /* Security.framework */; };
 		8336A5C614177BB00041A796 /* MInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 8336A5C514177BB00041A796 /* MInterface.m */; };
+		8342CFBC14209BF100F09ADF /* NetworkSetupWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 8342CFBB14209BF100F09ADF /* NetworkSetupWrapper.m */; };
 		836600701418B64900369E48 /* earth-sm.png in Resources */ = {isa = PBXBuildFile; fileRef = 8366006F1418B64900369E48 /* earth-sm.png */; };
 		836600731418B99F00369E48 /* earth.icns in Resources */ = {isa = PBXBuildFile; fileRef = 836600721418B99F00369E48 /* earth.icns */; };
 		836600751418C1D400369E48 /* ConfigProperties.plist in Resources */ = {isa = PBXBuildFile; fileRef = 836600741418C1D400369E48 /* ConfigProperties.plist */; };
@@ -48,6 +49,8 @@
 		8324A996140F47B3006C663C /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		8336A5C414177BB00041A796 /* MInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MInterface.h; sourceTree = "<group>"; };
 		8336A5C514177BB00041A796 /* MInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MInterface.m; sourceTree = "<group>"; };
+		8342CFBA14209BF100F09ADF /* NetworkSetupWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkSetupWrapper.h; sourceTree = "<group>"; };
+		8342CFBB14209BF100F09ADF /* NetworkSetupWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkSetupWrapper.m; sourceTree = "<group>"; };
 		8366006F1418B64900369E48 /* earth-sm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "earth-sm.png"; sourceTree = "<group>"; };
 		836600721418B99F00369E48 /* earth.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = earth.icns; sourceTree = "<group>"; };
 		836600741418C1D400369E48 /* ConfigProperties.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = ConfigProperties.plist; path = ../ConfigProperties.plist; sourceTree = "<group>"; };
@@ -130,6 +133,8 @@
 				83CFB5121417D33F00961FD6 /* EventHandler.m */,
 				8336A5C414177BB00041A796 /* MInterface.h */,
 				8336A5C514177BB00041A796 /* MInterface.m */,
+				8342CFBA14209BF100F09ADF /* NetworkSetupWrapper.h */,
+				8342CFBB14209BF100F09ADF /* NetworkSetupWrapper.m */,
 			);
 			name = Custom;
 			sourceTree = "<group>";
@@ -273,6 +278,7 @@
 				83CFB5131417D33F00961FD6 /* EventHandler.m in Sources */,
 				83C44576141941BE001F05B2 /* LoginController.m in Sources */,
 				83753783141F665A0071E8EB /* GrowlHandler.m in Sources */,
+				8342CFBC14209BF100F09ADF /* NetworkSetupWrapper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
